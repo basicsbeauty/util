@@ -78,20 +78,22 @@
             cmd="cp touchf.py ~/bin"
             eval ${cmd}
 
-            cmd="cp --no-deference touchf ~/bin"
+            cmd="cp --no-dereference touchf ~/bin"
             eval ${cmd}
 
         # createp & create.py
-            cmd="cp cratep.py ~/bin"
+            cmd="cp project_create.py ~/bin"
             eval ${cmd}
 
-            cmd="cp --no-deference createp ~/bin"
+            cmd="cp --no-dereference createp ~/bin"
             eval ${cmd}
 
         # backup & backup.sh
             cmd="cp backup.sh ~/bin"
             eval ${cmd}
 
-            cmd="cp --no-deference backup ~/bin"
+            cmd="cp --no-dereference backup ~/bin"
             eval ${cmd}
+
+        #
 
