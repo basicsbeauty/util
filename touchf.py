@@ -43,6 +43,8 @@ def createFile( file_to_create):
 
   FILE_TYPE_SQL = 1
   FILE_TYPE_PROTOBUF = 2
+  FILE_TYPE_BASH_SCRIPT = 3
+  FILE_TYPE_PYTHON_SCRIPT = 4
 
   file_type = None
   comment_character = "#"
@@ -58,6 +60,12 @@ def createFile( file_to_create):
     elif file_extension == '.proto':
       file_type = FILE_TYPE_PROTOBUF
       comment_character = "//"
+    elif file_extension == '.sh':
+      file_type = FILE_TYPE_BASH_SCRIPT
+      comment_character = "#"
+    elif file_extension == '.py':
+      file_type = FILE_TYPE_PYTHON_SCRIPT
+      comment_character = "#"
   #print "File: Extn: ", file_extension, " Cmnt: ", comment_character
   
   if 1 == len(comment_character):
