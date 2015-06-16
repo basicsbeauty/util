@@ -12,7 +12,7 @@
 ###############################
 # Files: Individual
 ###############################
-    # BASH Environment
+    # Vim Environment
         printf "Setting up %-16s .vimrc \n"
         source_file="vimrc"
         target_file="~/.vimrc"
@@ -40,7 +40,7 @@
         printf "\t Command    : $cmd \n"
         eval $cmd
 
-    # BASH Aliases
+    # BASH Environment
         printf "Setting up %-16s .bashrc \n"
         source_file="bashrc"
         target_file="~/.bashrc"
@@ -58,8 +58,8 @@
 # Directories
 ###############################
 
-    # { temp, learn, quick, backup}
-        mkdir ~/temp ~/learn ~/quick ~/backup
+    # { temp, learn, backup}
+        mkdir ~/temp ~/learn ~/backup        
 
     # ~/bin
         printf "Setting up %-16s directory, ~/bin \n"
@@ -95,5 +95,19 @@
             cmd="cp --no-dereference backup ~/bin"
             eval ${cmd}
 
-        #
+###############################
+# Directories & Files
+###############################
 
+    # Dirctories { quick, quick/cpp, quick/python}
+        mkdir --parents ~/quick/cpp
+        mkdir --parents ~/quick/python
+        
+    # File { z.cpp}
+        cmd="cp --no-dereference z.cpp ~/quick/cpp"
+        eval ${cmd}
+
+    # File { x.py}
+        cmd="cp --no-dereference x.py ~/quick/python"
+        eval ${cmd}
+        
