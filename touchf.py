@@ -55,16 +55,16 @@ def printHelp():
 ###############################
 def createFile():
 
-  global project_name
-  global file_to_create
+    global project_name
+    global file_to_create
 
-  file_type = None
-  comment_character = "#"
-  
-  # Get file Extension
-  file_extension = os.path.splitext(file_to_create)[1].strip()
-  
-  # Comment character
+    file_type = None
+    comment_character = "#"
+
+    # Get file Extension
+    file_extension = os.path.splitext(file_to_create)[1].strip()
+
+    # Comment character
     if file_extension:
 
         if file_extension == '.cpp':
