@@ -73,7 +73,7 @@ def createProject( _project_name):
   else:
     print "INFO: Project directory already present:"
     
-  # Project: Directories
+  # Directories
   # - { src, web, aoo_model, auto_gen, data_model}
   DIR_SRC = 'src'
   DIR_WEB = 'web'
@@ -90,7 +90,7 @@ def createProject( _project_name):
       return False
   
   # Files
-  # Project: aao_model: proto: file: touch 
+  # { aoo_model/<project>.proto} 
   protobuf_file = os.path.join( _project_name, DIR_AOO, _project_name.lower() + ".proto")
   cmd = "touchf " + protobuf_file
   status, output = commands.getstatusoutput(cmd)
@@ -98,7 +98,7 @@ def createProject( _project_name):
     print "FATAL: Protobuf file creation failed for project: " + protobuf_file
     return False
 
-  # Project: aao_model: proto: file: touch
+  # DB: { data_model/{db_setup.sql, db_cleanup.sql, table_setup.sql, table_cleanup.sql}}
   sql_files =  [ 'db_setup.sql', 'db_cleanup.sql', 'table_setup.sql', 'table_cleanup.sql']
   for new_sql_file in sql_files:
     cmd = "touchf " + os.path.join( _project_name , DIR_DATA, new_sql_file)
