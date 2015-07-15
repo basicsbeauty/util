@@ -14,10 +14,10 @@ import os
 import sys
 import commands
 
-FAILURE = 1
-SUCCESS = 0
+BASH_FAILURE = 1
+BASH_SUCCESS = 0
 
-ARG_VALID_COUNT = 2
+ARG_VALID_COUNT = 1 + 1
 
 project_name = None
 file_to_create = None
@@ -38,7 +38,7 @@ def processCommandLine():
 def printHelp():
   print __file__, ": Invalid usage"
   print __file__, " <project_name_to_create>"
-  return FAILURE
+  return BASH_FAILURE
 
 ###################################
 # Function: createProject
@@ -46,16 +46,16 @@ def printHelp():
 def createProject( _project_name):
   
   # Project Directory: <project_dir>
+  # <project_dir>/src
+  # <project_dir>/web
+  # <project_dir>/auto_gen
   # <project_dir>/aao_model
-  # <project_dir>/aao_model/<project_name>.proto
   # <project_dir>/data_model
   # <project_dir>/data_model/db_setup.sql
   # <project_dir>/data_model/db_cleanup.sql
   # <project_dir>/data_model/table_setup.sql
   # <project_dir>/data_model/table_cleanup.sql
-  # <project_dir>/auto_gen
-  # <project_dir>/src
-  # <project_dir>/web
+  # <project_dir>/aao_model/<project_name>.proto
 
   if not _project_name:
     print "FATAL: Incorrect project name: " . _project_name
@@ -73,10 +73,16 @@ def createProject( _project_name):
   else:
     print "INFO: Project directory already present:"
     
-  # Project: aao_model: Directory: Create
-  new_dirs = [ 'aao_model', 'data_model', 'auto_gen', 'src', 'web']
+  # Project: Directories
+  # - { src, web, aoo_model, auto_gen, data_model}
+  DIR_SRC = 'src'
+  DIR_WEB = 'web'
+  DIR_AOO = 'aoo_model'
+  DIR_AUTO = 'auto_gen'
+  DIR_DATA = 'data_model'
+  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA]
   for dir_name in new_dirs:
-    new_dir = _project_name + "/" + dir_name
+    new_dir = os.path.join( _project_name, dir_name)
     cmd = "mkdir " + new_dir
     status, output = commands.getstatusoutput(cmd)
     if status != 0:
@@ -84,8 +90,8 @@ def createProject( _project_name):
       return False
   
   # Files
-  # Project: aao_model: proto: file: touch
-  protobuf_file =  _project_name + "/aao_model/" + _project_name.lower() + ".proto"
+  # Project: aao_model: proto: file: touch 
+  protobuf_file = os.path.join( _project_name, DIR_AOO, _project_name.lower() + ".proto")
   cmd = "touchf " + protobuf_file
   status, output = commands.getstatusoutput(cmd)
   if status != 0:
@@ -95,7 +101,7 @@ def createProject( _project_name):
   # Project: aao_model: proto: file: touch
   sql_files =  [ 'db_setup.sql', 'db_cleanup.sql', 'table_setup.sql', 'table_cleanup.sql']
   for new_sql_file in sql_files:
-    cmd = "touchf " + _project_name + "/data_model/" + new_sql_file
+    cmd = "touchf " + os.path.join( _project_name , DIR_DATA, new_sql_file)
     status, output = commands.getstatusoutput(cmd)
     if status != 0:
       print "FATAL: Protobuf file creation failed for project: " + new_sql_file
@@ -104,19 +110,25 @@ def createProject( _project_name):
   return True
 
 ###################################
-# Function: main()
+# Function: create_project()
 ###################################  
-def main():
+def create_project():
 
   status, file_to_create = processCommandLine() 
   if not status:
     return printHelp()
-  
+
   if not createProject( file_to_create):
     print "File: Creation: Failed: "
-    return FAILURE
+    return BASH_FAILURE
 
-  return SUCCESS
+  return BASH_SUCCESS
 
-main()
+###################################
+# Function: main()
+###################################  
+def main():
+    return create_project()
 
+if __name__ == "__main__":
+    sys.exit( main())

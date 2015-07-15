@@ -8,15 +8,13 @@
 import os
 import sys
 
-from os import path
-
 ###############################
 # Constants: Begin
 ###############################
 FAILURE = 1
 SUCCESS = 0
 
-ARG_VALID = 2
+ARG_VALID = 1 + 1
 
 FILE_TYPE_CPP = 1
 FILE_TYPE_HPP = 2
@@ -59,11 +57,11 @@ def createFile():
     global file_to_create
 
     file_type = None
-    comment_character = "#"
 
     # Get file Extension
     file_extension = os.path.splitext(file_to_create)[1].strip()
 
+    comment_character = "#"
     # Comment character
     if file_extension:
 
@@ -85,7 +83,9 @@ def createFile():
         elif file_extension == '.py':
             file_type = FILE_TYPE_PYTHON_SCRIPT
             comment_character = "#"
-      
+    else:
+        return False
+    
     #print "File: Extn: ", file_extension, " Cmnt: ", comment_character
   
     fp = open( file_to_create, 'w')
@@ -93,12 +93,31 @@ def createFile():
     if not fp:
       return False
   
+    process_shebang( fp, file_type)
     addStandardHeader( fp, file_type, comment_character)
     
     fp.write("\n")
     fp.close()
     return True
 
+###############################
+# Function: process_shebang
+###############################
+def process_shebang( fp, file_type):
+
+    if fp is None:
+        return False
+    elif not isinstance( fp, file):
+        return False
+    
+    SHE_BANG_SUFFIX = "#!/usr/bin/env "
+    if( file_type == FILE_TYPE_BASH_SCRIPT):
+        fp.write( SHE_BANG_SUFFIX + "bash \n")
+    elif ( file_type == FILE_TYPE_PYTHON_SCRIPT):
+        fp.write( SHE_BANG_SUFFIX + "python \n")
+    
+    fp.write("\n")
+    
 ###############################
 # Function: main()
 ###############################
@@ -128,7 +147,6 @@ def addStandardHeader( fp, file_type, comment_character):
       fp.write( comment_character + "   - Action: \n")
       fp.write( comment_character + "   - Object: \n")
     fp.write( comment_character * comment_character_length + "\n")
-
 
 ###############################
 # Function: touchf()
