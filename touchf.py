@@ -7,6 +7,7 @@
 
 import os
 import sys
+import commands
 
 ###############################
 # Constants: Begin
@@ -95,10 +96,29 @@ def createFile():
   
     process_shebang( fp, file_type)
     addStandardHeader( fp, file_type, comment_character)
+    process_premissions( file_type)
     
     fp.write("\n")
     fp.close()
     return True
+
+###############################
+# Function: process_premission
+###############################
+def process_premissions( file_type):
+
+    global file_to_create
+
+    if file_type is None:
+        return False
+    elif not isinstance( file_type, int):
+        return False
+
+    if( (file_type == FILE_TYPE_BASH_SCRIPT)
+     or (file_type == FILE_TYPE_PYTHON_SCRIPT)):
+        cmd = "chmod 744 " + file_to_create
+        status, output = commands.getstatusoutput(cmd)        
+        return (status == 0)
 
 ###############################
 # Function: process_shebang
