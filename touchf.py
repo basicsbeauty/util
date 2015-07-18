@@ -35,10 +35,10 @@ file_to_create = None
 # Function: processCommandLine()
 ###############################
 def processCommandLine():
-  
+
     if ARG_VALID != len(sys.argv):
         return False, None
-  
+
     return True, sys.argv[1]
 
 ###############################
@@ -86,21 +86,78 @@ def createFile():
             comment_character = "#"
     else:
         return False
-    
+
     #print "File: Extn: ", file_extension, " Cmnt: ", comment_character
-  
+
     fp = open( file_to_create, 'w')
-  
+
     if not fp:
       return False
-  
+
     process_shebang( fp, file_type)
     addStandardHeader( fp, file_type, comment_character)
+    process_body( fp, file_type)
     process_premissions( file_type)
-    
+
     fp.write("\n")
     fp.close()
     return True
+
+###############################
+# Function: process_body
+###############################
+def process_body( fp, file_type):
+
+    if fp is None:
+        return False
+    elif not isinstance( fp, file):
+        return False
+
+    if( file_type == FILE_TYPE_PYTHON_SCRIPT):
+        process_body_python( fp)
+
+###############################
+# Function: process_body_python
+###############################
+def process_body_python( fp):
+
+    if fp is None:
+        return False
+    elif not isinstance( fp, file):
+        return False
+
+    # File name without extension
+    #  test.py -> test
+    script_main_function_name = file_to_create.split( '.')[0]
+
+    import_stub = "\nimport os\nimport sys\n\n"
+    fp.write( import_stub)
+
+    # Constants
+    fp.write("###############################\n")
+    fp.write("# Constants\n")
+    fp.write("###############################\n")
+    fp.write("BASH_RCODE_FAILURE=1\n")
+    fp.write("BASH_RCODE_SUCCESS=0\n")
+    fp.write("FUNCTION_RCODE_FAILURE=0\n")
+    fp.write("FUNCTION_RCODE_SUCCESS=1\n\n")
+
+    # Function
+    function_name_signature = script_main_function_name+"()"
+    fp.write("###############################\n")
+    fp.write("# Function: " + script_main_function_name + "\n")
+    fp.write("###############################\n")
+    fp.write("def " + function_name_signature + ":\n")
+    fp.write("    pass\n\n")
+
+    fp.write("###############################\n")
+    fp.write("# Function: main \n")
+    fp.write("###############################\n")
+    fp.write("def main():\n")
+    fp.write("    return " + function_name_signature + "\n\n")
+
+    fp.write("if __name__ == \"__main__\":\n")
+    fp.write("    sys.exit( main())\n\n")
 
 ###############################
 # Function: process_premission
@@ -117,7 +174,7 @@ def process_premissions( file_type):
     if( (file_type == FILE_TYPE_BASH_SCRIPT)
      or (file_type == FILE_TYPE_PYTHON_SCRIPT)):
         cmd = "chmod 744 " + file_to_create
-        status, output = commands.getstatusoutput(cmd)        
+        status, output = commands.getstatusoutput(cmd)
         return (status == 0)
 
 ###############################
@@ -129,15 +186,15 @@ def process_shebang( fp, file_type):
         return False
     elif not isinstance( fp, file):
         return False
-    
+
     SHE_BANG_SUFFIX = "#!/usr/bin/env "
     if( file_type == FILE_TYPE_BASH_SCRIPT):
         fp.write( SHE_BANG_SUFFIX + "bash \n")
     elif ( file_type == FILE_TYPE_PYTHON_SCRIPT):
         fp.write( SHE_BANG_SUFFIX + "python \n")
-    
+
     fp.write("\n")
-    
+
 ###############################
 # Function: main()
 ###############################
@@ -170,15 +227,15 @@ def addStandardHeader( fp, file_type, comment_character):
 
 ###############################
 # Function: touchf()
-###############################  
+###############################
 def touchf():
 
     global file_to_create
 
-    status, file_to_create = processCommandLine() 
+    status, file_to_create = processCommandLine()
     if not status:
         return printHelp()
-  
+
     if not createFile():
         print "File: Creation: Failed: "
         return FAILURE
@@ -187,8 +244,8 @@ def touchf():
 
 ###############################
 # Function: main()
-###############################  
-def main():    
+###############################
+def main():
     sys.exit( touchf())
 
 if __name__ == "__main__":
