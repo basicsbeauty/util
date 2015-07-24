@@ -128,7 +128,7 @@ def process_body_python( fp):
 
     # File name without extension
     #  test.py -> test
-    script_main_function_name = file_to_create.split( '.')[0]
+    script_main_function_name = file_to_create.split('/')[-1].split('.')[0]
 
     import_stub = "\nimport os\nimport sys\n\n"
     fp.write( import_stub)
