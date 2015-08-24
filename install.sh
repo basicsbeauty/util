@@ -6,7 +6,7 @@
 # Project : Util
 # Date    : 2015-05-24
 # User    : ssatish
-# Scope   : 
+# Scope   :
 ################################################################
 
 ###############################
@@ -59,7 +59,7 @@
 ###############################
 
     # { temp, learn, backup}
-        mkdir ~/temp ~/learn ~/backup        
+        mkdir ~/temp ~/learn ~/backup
 
     # ~/bin
         printf "Setting up %-16s directory, ~/bin \n"
@@ -73,6 +73,13 @@
 
         # Copy files
         printf "Setting up %-16s directory, ~/bin copying files\n"
+
+        # mkdirpy & mkdirpy.sh
+            cmd="cp mkdirpy.sh ~/bin"
+            eval ${cmd}
+
+            cmd="cp --no-dereference mkdirpy ~/bin"
+            eval ${cmd}
 
         # touchf & touchf.py
             cmd="cp touchf.py ~/bin"
@@ -102,7 +109,7 @@
     # Dirctories { quick, quick/cpp, quick/python}
         mkdir --parents ~/quick/cpp
         mkdir --parents ~/quick/python
-        
+
     # File { z.cpp}
         cmd="cp --no-dereference z.cpp ~/quick/cpp"
         eval ${cmd}
@@ -110,4 +117,3 @@
     # File { x.py}
         cmd="cp --no-dereference x.py ~/quick/python"
         eval ${cmd}
-        

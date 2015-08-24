@@ -80,7 +80,9 @@ def createProject( _project_name):
   DIR_AOO = 'aoo_model'
   DIR_AUTO = 'auto_gen'
   DIR_DATA = 'data_model'
-  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA]
+  DIR_TESTS = 'tests'
+  DIR_SRC_TEST = os.path.join( DIR_SRC, DIR_TESTS)
+  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA, DIR_SRC_TEST]
   for dir_name in new_dirs:
     new_dir = os.path.join( _project_name, dir_name)
     cmd = "mkdir " + new_dir
