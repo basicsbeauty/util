@@ -101,7 +101,7 @@ def createProject( _project_name):
     return False
 
   # DB: { data_model/{db_setup.sql, db_cleanup.sql, table_setup.sql, table_cleanup.sql}}
-  sql_files =  [ 'db_setup.sql', 'db_cleanup.sql', 'table_setup.sql', 'table_cleanup.sql', 'install.sh', 'uninstall.sh', 'check.sh']
+  sql_files =  [ 'db_setup.sql', 'db_cleanup.sql', 'table_setup.sql', 'table_cleanup.sql', 'manage.py']
   for new_sql_file in sql_files:
     cmd = "touchf " + os.path.join( _project_name , DIR_DATA, new_sql_file)
     status, output = commands.getstatusoutput(cmd)
