@@ -58,7 +58,7 @@ def createProject( _project_name):
   # <project_dir>/aao_model/<project_name>.proto
 
   if not _project_name:
-    print "FATAL: Incorrect project name: " . _project_name
+    print "FATAL: Invalid project name: " . _project_name
     return False
   
   _project_name = str(_project_name)
@@ -92,7 +92,7 @@ def createProject( _project_name):
       return False
   
   # Files
-  # { aoo_model/<project>.proto} 
+  # { aoo_model/<project>.proto}
   protobuf_file = os.path.join( _project_name, DIR_AOO, _project_name.lower() + ".proto")
   cmd = "touchf " + protobuf_file
   status, output = commands.getstatusoutput(cmd)
@@ -106,9 +106,18 @@ def createProject( _project_name):
     cmd = "touchf " + os.path.join( _project_name , DIR_DATA, new_sql_file)
     status, output = commands.getstatusoutput(cmd)
     if status != 0:
-      print "FATAL: Protobuf file creation failed for project: " + new_sql_file
+      print "FATAL: SQL File create failed: " + new_sql_file
       return False
-    
+
+  # { README, AUTHORS}
+  files_misc =  [ 'README', 'AUTHORS']
+  for file_misc in files_misc:
+    cmd = "touchf " + os.path.join( _project_name , file_misc)
+    status, output = commands.getstatusoutput(cmd)
+    if status != 0:
+      print "FATAL: Misc file creation failed: " + file_misc
+      return False
+
   return True
 
 ###################################

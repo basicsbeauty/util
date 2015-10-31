@@ -23,6 +23,7 @@ FILE_TYPE_SQL = 3
 FILE_TYPE_PROTOBUF = 4
 FILE_TYPE_BASH_SCRIPT = 5
 FILE_TYPE_PYTHON_SCRIPT = 6
+FILE_TYPE_PYTHON_UNKNOWN = 7
 
 ###############################
 # Constants: End
@@ -85,7 +86,9 @@ def createFile():
             file_type = FILE_TYPE_PYTHON_SCRIPT
             comment_character = "#"
     else:
-        return False
+        file_type = FILE_TYPE_PYTHON_UNKNOWN
+        comment_character = "#"
+        
 
     #print "File: Extn: ", file_extension, " Cmnt: ", comment_character
 
