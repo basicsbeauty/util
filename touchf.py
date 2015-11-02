@@ -221,8 +221,8 @@ def addStandardHeader( fp, file_type, comment_character):
     fp.write( comment_character + " Project : " + "\n")
     fp.write( comment_character + " Date    : " + os.popen( "date +%Y-%m-%d").read().strip() + "\n")
     fp.write( comment_character + " Author  : " + os.getlogin().strip() + "\n")
-    fp.write( comment_character + " Usage   : " + "\n")
     fp.write( comment_character + " Scope   : " + "\n")
+    fp.write( comment_character + " Usage   : " + "\n")
     if file_type == FILE_TYPE_PROTOBUF:
       fp.write( comment_character + "   - Agent : \n")
       fp.write( comment_character + "   - Action: \n")
