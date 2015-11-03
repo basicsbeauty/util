@@ -14,7 +14,7 @@ then
 fi
 
 # File backup
-cp $1 ~/Backup/$1
+cp $1 ~/backup/
 
 if [ $? -ne 0 ]
 then
