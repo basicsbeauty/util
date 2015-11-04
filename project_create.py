@@ -119,8 +119,13 @@ def createProject( _project_name):
       return False
 
   # TODO
-  # external/dependencies.json
-  # Depends on touchf/{JSON File Support}
+  # external/dependencies.xml
+  dependencies_file = os.path.join( _project_name, DIR_EXTERNAL, "dependencies.xml")
+  cmd = "touchf " + dependencies_file
+  status, output = commands.getstatusoutput(cmd)
+  if status != 0:
+    print "FATAL: Protobuf file creation failed for project: " + protobuf_file
+    return False
 
   # { README, AUTHORS}
   files_misc =  [ 'README', 'AUTHORS']

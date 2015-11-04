@@ -17,16 +17,13 @@ SUCCESS = 0
 
 ARG_VALID = 1 + 1
 
-FILE_TYPE_CPP = 1
-FILE_TYPE_HPP = 2
-FILE_TYPE_SQL = 3
-FILE_TYPE_PROTOBUF = 4
-FILE_TYPE_BASH_SCRIPT = 5
-FILE_TYPE_PYTHON_SCRIPT = 6
-FILE_TYPE_PYTHON_UNKNOWN = 7
-
-# TODO
-# JSON File
+FILE_TYPE_CPP, \
+FILE_TYPE_HPP, \
+FILE_TYPE_SQL, \
+FILE_TYPE_XML, \
+FILE_TYPE_PROTOBUF, \
+FILE_TYPE_BASH_SCRIPT, \
+FILE_TYPE_PYTHON_SCRIPT = range( 0, 7)
 
 ###############################
 # Constants: End
@@ -87,6 +84,9 @@ def createFile():
             comment_character = "#"
         elif file_extension == '.py':
             file_type = FILE_TYPE_PYTHON_SCRIPT
+            comment_character = "#"
+        elif file_extension == '.xml':
+            file_type = FILE_TYPE_XML
             comment_character = "#"
     else:
         file_type = FILE_TYPE_PYTHON_UNKNOWN
