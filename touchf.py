@@ -25,6 +25,9 @@ FILE_TYPE_BASH_SCRIPT = 5
 FILE_TYPE_PYTHON_SCRIPT = 6
 FILE_TYPE_PYTHON_UNKNOWN = 7
 
+# TODO
+# JSON File
+
 ###############################
 # Constants: End
 ###############################

@@ -46,11 +46,19 @@ def printHelp():
 def createProject( _project_name):
   
   # Project Directory: <project_dir>
+  
   # <project_dir>/src
-  # <project_dir>/web
+  # <project_dir>/web  
+  # <project_dir>/external  
   # <project_dir>/auto_gen
   # <project_dir>/aao_model
-  # <project_dir>/data_model
+  # <project_dir>/data_model  
+  
+  # Files
+  
+  # <project_dir>/README
+  # <project_dir>/AUTHORS
+  
   # <project_dir>/data_model/db_setup.sql
   # <project_dir>/data_model/db_cleanup.sql
   # <project_dir>/data_model/table_setup.sql
@@ -81,8 +89,9 @@ def createProject( _project_name):
   DIR_AUTO = 'auto_gen'
   DIR_DATA = 'data_model'
   DIR_TESTS = 'tests'
+  DIR_EXTERNAL = 'external'
   DIR_SRC_TEST = os.path.join( DIR_SRC, DIR_TESTS)
-  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA, DIR_SRC_TEST]
+  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA, DIR_SRC_TEST, DIR_EXTERNAL]
   for dir_name in new_dirs:
     new_dir = os.path.join( _project_name, dir_name)
     cmd = "mkdir " + new_dir
@@ -108,6 +117,10 @@ def createProject( _project_name):
     if status != 0:
       print "FATAL: SQL File create failed: " + new_sql_file
       return False
+
+  # TODO
+  # external/dependencies.json
+  # Depends on touchf/{JSON File Support}
 
   # { README, AUTHORS}
   files_misc =  [ 'README', 'AUTHORS']
