@@ -13,57 +13,64 @@
 # Files: Individual
 ###############################
     # Vim Environment
+        echo "===================================="
         printf "Setting up %-16s .vimrc \n"
+        echo "===================================="
         source_file="vimrc"
-        target_file="~/.vimrc"
-        #printf "\t Target file: $target_file \n"
-        if [ -f $target_file ]
+        target_file="$HOME/.vimrc"
+        if [ ! -f "$target_file" ]
         then
-            cmd="cat "$source_file" >> "$target_file
-        else
             cmd="cp "$source_file" "$target_file
+            printf "\t Command    : $cmd \n"
+            eval $cmd
+        else
+            printf "\t Skipping\n"
         fi
-        printf "\t Command    : $cmd \n"
-        eval $cmd
 
     # BASH Aliases
+        echo "===================================="
         printf "Setting up %-16s .bash_aliases \n"
+        echo "===================================="
         source_file="bash_aliases"
-        target_file="~/.bash_aliases"
+        target_file="$HOME/.bash_aliases"
         #printf "\t Target file: $target_file \n"
-        if [ -f $target_file ]
+        if [ ! -f $target_file ]
         then
-            cmd="cat "$source_file" >> "$target_file
-        else
             cmd="cp "$source_file" "$target_file
+            printf "\t Command    : $cmd \n"
+            eval $cmd
+        else
+            printf "\t Skipping\n"
         fi
-        printf "\t Command    : $cmd \n"
-        eval $cmd
 
     # BASH Environment
+        echo "===================================="
         printf "Setting up %-16s .bashrc \n"
+        echo "===================================="
         source_file="bashrc"
-        target_file="~/.bashrc"
+        target_file="$HOME/.bashrc"
         #printf "\t Target file: $target_file \n"
-        if [ -f $target_file ]
+        if [ ! -f $target_file ]
         then
-            cmd="cat "$source_file" >> "$target_file
-        else
             cmd="cp "$source_file" "$target_file
+            printf "\t Command    : $cmd \n"
+            eval $cmd
+        else
+            printf "\t Skipping\n"
         fi
-        printf "\t Command    : $cmd \n"
-        eval $cmd
 
 ###############################
 # Directories
 ###############################
 
     # { temp, learn, backup}
-        mkdir ~/temp ~/learn ~/backup
+        mkdir $HOME/temp $HOME/learn $HOME/backup
 
-    # ~/bin
-        printf "Setting up %-16s directory, ~/bin \n"
-        target_directory="~/bin"
+    # $HOME/bin
+        echo "===================================="
+        printf "Setting up %-16s directory, $HOME/bin \n"
+        target_directory="$HOME/bin"
+        echo "===================================="
         if [ ! -e $target_directory ]
         then
             cmd="mkdir "$target_directory
@@ -72,34 +79,34 @@
         fi
 
         # Copy files
-        printf "Setting up %-16s directory, ~/bin copying files\n"
+        printf "Setting up %-16s directory, $HOME/bin copying files\n"
 
         # mkdirpy & mkdirpy.sh
-            cmd="cp mkdirpy.sh ~/bin"
+            cmd="cp mkdirpy.sh $HOME/bin"
             eval ${cmd}
 
-            cmd="cp --no-dereference mkdirpy ~/bin"
+            cmd="cp --no-dereference mkdirpy $HOME/bin"
             eval ${cmd}
 
         # touchf & touchf.py
-            cmd="cp touchf.py ~/bin"
+            cmd="cp touchf.py $HOME/bin"
             eval ${cmd}
 
-            cmd="cp --no-dereference touchf ~/bin"
+            cmd="cp --no-dereference touchf $HOME/bin"
             eval ${cmd}
 
         # createp & create.py
-            cmd="cp project_create.py ~/bin"
+            cmd="cp project_create.py $HOME/bin"
             eval ${cmd}
 
-            cmd="cp --no-dereference createp ~/bin"
+            cmd="cp --no-dereference createp $HOME/bin"
             eval ${cmd}
 
         # backup & backup.sh
-            cmd="cp backup.sh ~/bin"
+            cmd="cp backup.sh $HOME/bin"
             eval ${cmd}
 
-            cmd="cp --no-dereference backup ~/bin"
+            cmd="cp --no-dereference backup $HOME/bin"
             eval ${cmd}
 
 ###############################
@@ -107,13 +114,13 @@
 ###############################
 
     # Dirctories { quick, quick/cpp, quick/python}
-        mkdir --parents ~/quick/cpp
-        mkdir --parents ~/quick/python
+        mkdir --parents $HOME/quick/cpp
+        mkdir --parents $HOME/quick/python
 
     # File { z.cpp}
-        cmd="cp --no-dereference z.cpp ~/quick/cpp"
+        cmd="cp --no-dereference z.cpp $HOME/quick/cpp"
         eval ${cmd}
 
     # File { x.py}
-        cmd="cp --no-dereference x.py ~/quick/python"
+        cmd="cp --no-dereference x.py $HOME/quick/python"
         eval ${cmd}

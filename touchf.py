@@ -196,8 +196,6 @@ def process_shebang( fp, file_type):
     elif ( file_type == FILE_TYPE_PYTHON_SCRIPT):
         fp.write( SHE_BANG_SUFFIX + "python \n")
 
-    fp.write("\n")
-
 ###############################
 # Function: main()
 ###############################
