@@ -17,7 +17,7 @@ alias dl='cd ~/learn'
 alias dq='cd ~/quick'
 alias dp='cd ~/backup'
 
-alias w='cd ~/'
+alias dw='cd ~/backup'
 
 ##################################
 # Util

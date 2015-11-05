@@ -83,15 +83,23 @@ def createProject( _project_name):
     
   # Directories
   # - { src, web, aoo_model, auto_gen, data_model}
-  DIR_SRC = 'src'
+  
   DIR_WEB = 'web'
-  DIR_AOO = 'aoo_model'
-  DIR_AUTO = 'auto_gen'
+  DIR_AOO = 'aoo_model'  
   DIR_DATA = 'data_model'
   DIR_TESTS = 'tests'
   DIR_EXTERNAL = 'external'
-  DIR_SRC_TEST = os.path.join( DIR_SRC, DIR_TESTS)
-  new_dirs = [ DIR_SRC, DIR_WEB, DIR_AOO, DIR_AUTO, DIR_DATA, DIR_SRC_TEST, DIR_EXTERNAL]
+  
+  # { src, src/auto_gen, src/tests}
+  DIR_SRC = 'src'
+  DIR_AUTO = 'auto_gen'
+  DIR_JAVA = 'java'
+    
+  DIR_SRC_AUTO = os.path.join( DIR_SRC, DIR_AUTO)
+  DIR_SRC_TEST = os.path.join( DIR_SRC, DIR_TESTS)  
+  DIR_SRC_AUTO_JAVA = os.path.join( DIR_SRC_AUTO, DIR_JAVA)
+
+  new_dirs = [ DIR_WEB, DIR_AOO, DIR_DATA, DIR_SRC, DIR_SRC_AUTO, DIR_SRC_TEST, DIR_SRC_AUTO_JAVA, DIR_EXTERNAL]
   for dir_name in new_dirs:
     new_dir = os.path.join( _project_name, dir_name)
     cmd = "mkdir " + new_dir
@@ -130,7 +138,7 @@ def createProject( _project_name):
   # { README, AUTHORS}
   files_misc =  [ 'README', 'AUTHORS']
   for file_misc in files_misc:
-    cmd = "touchf " + os.path.join( _project_name , file_misc)
+    cmd = "touch " + os.path.join( _project_name , file_misc)
     status, output = commands.getstatusoutput(cmd)
     if status != 0:
       print "FATAL: Misc file creation failed: " + file_misc
