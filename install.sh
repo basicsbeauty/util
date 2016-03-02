@@ -59,6 +59,10 @@
             printf "\t Skipping\n"
         fi
 
+    # BASH: Sensible
+        cmd="cp sensible.bash ~/bin" 
+	eval $cmd
+
 ###############################
 # Directories
 ###############################
