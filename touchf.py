@@ -17,13 +17,15 @@ SUCCESS = 0
 
 ARG_VALID = 1 + 1
 
+FILE_TYPE_JS, \
 FILE_TYPE_CPP, \
 FILE_TYPE_HPP, \
 FILE_TYPE_SQL, \
 FILE_TYPE_XML, \
+FILE_TYPE_JSON, \
 FILE_TYPE_PROTOBUF, \
 FILE_TYPE_BASH_SCRIPT, \
-FILE_TYPE_PYTHON_SCRIPT = range( 0, 7)
+FILE_TYPE_PYTHON_SCRIPT = range( 0, 9)
 
 ###############################
 # Constants: End
@@ -88,6 +90,12 @@ def createFile():
         elif file_extension == '.xml':
             file_type = FILE_TYPE_XML
             comment_character = "#"
+        elif file_extension == '.json':
+            file_type = FILE_TYPE_JSON
+            comment_character = "//"
+        elif file_extension == '.js':
+            file_type = FILE_TYPE_JS
+            comment_character = "//"
     else:
         file_type = FILE_TYPE_PYTHON_UNKNOWN
         comment_character = "#"
@@ -121,6 +129,53 @@ def process_body( fp, file_type):
 
     if( file_type == FILE_TYPE_PYTHON_SCRIPT):
         process_body_python( fp)
+    elif(file_type == FILE_TYPE_CPP):
+        process_body_cpp( fp)
+
+###############################
+# Function: process_body_python
+###############################
+def process_body_cpp( fp):
+
+    if fp is None:
+        return False
+    elif not isinstance( fp, file):
+        return False
+
+    # File name without extension
+    #  test.py -> test
+    script_main_function_name = file_to_create.split('/')[-1].split('.')[0]
+
+    import_stub = "\n#include <iostream>\n#include <cstdlib>\n\n"
+    fp.write("using namespace std;\n")
+    fp.write( import_stub)
+
+    # main
+    fp.write("int main()\n")
+    fp.write("# Constants\n")
+    fp.write("###############################\n")
+    fp.write("BASH_RCODE_FAILURE=1\n")
+    fp.write("BASH_RCODE_SUCCESS=0\n")
+    fp.write("FUNCTION_RCODE_FAILURE=0\n")
+    fp.write("FUNCTION_RCODE_SUCCESS=1\n\n")
+
+    # Function
+    function_name_signature = script_main_function_name+"()"
+    fp.write("###############################\n")
+    fp.write("# Function: " + script_main_function_name + "\n")
+    fp.write("###############################\n")
+    fp.write("def " + function_name_signature + ":\n")
+    fp.write("    pass\n\n")
+
+    fp.write("###############################\n")
+    fp.write("# Function: main \n")
+    fp.write("###############################\n")
+    fp.write("def main():\n")
+    fp.write("    return " + function_name_signature + "\n\n")
+
+    fp.write("if __name__ == \"__main__\":\n")
+    fp.write("    sys.exit( main())\n\n")
+
 
 ###############################
 # Function: process_body_python
