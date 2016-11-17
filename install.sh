@@ -60,7 +60,7 @@
         fi
 
     # BASH: Sensible
-        cmd="cp sensible.bash ~/bin" 
+        # cmd="cp sensible.bash ~/bin/"
 	eval $cmd
 
 ###############################
@@ -68,7 +68,7 @@
 ###############################
 
     # { temp, learn, backup}
-        mkdir $HOME/temp $HOME/learn $HOME/backup
+        mkdir $HOME/temp $HOME/learn $HOME/backup $HOME/bin
 
     # $HOME/bin
         echo "===================================="
@@ -87,30 +87,41 @@
 
         # mkdirpy & mkdirpy.sh
             cmd="cp mkdirpy.sh $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
             cmd="cp --no-dereference mkdirpy $HOME/bin"
+            cmd="cp mkdirpy $HOME/bin"
             eval ${cmd}
 
         # touchf & touchf.py
             cmd="cp touchf.py $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
             cmd="cp --no-dereference touchf $HOME/bin"
+            cmd="cp touchf $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
         # createp & create.py
             cmd="cp project_create.py $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
             cmd="cp --no-dereference createp $HOME/bin"
+            cmd="cp createp $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
         # backup & backup.sh
             cmd="cp backup.sh $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
             cmd="cp --no-dereference backup $HOME/bin"
+            cmd="cp backup $HOME/bin"
+	    echo "Cmd: ", $cmd
             eval ${cmd}
 
 ###############################
@@ -123,8 +134,10 @@
 
     # File { z.cpp}
         cmd="cp --no-dereference z.cpp $HOME/quick/cpp"
+        cmd="cp z.cpp $HOME/quick/cpp"
         eval ${cmd}
 
     # File { x.py}
         cmd="cp --no-dereference x.py $HOME/quick/python"
+        cmd="cp x.py $HOME/quick/python"
         eval ${cmd}
