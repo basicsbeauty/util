@@ -17,6 +17,7 @@ SUCCESS = 0
 
 ARG_VALID = 1 + 1
 
+FILE_TYPE_GO, \
 FILE_TYPE_JS, \
 FILE_TYPE_CPP, \
 FILE_TYPE_HPP, \
@@ -25,7 +26,7 @@ FILE_TYPE_XML, \
 FILE_TYPE_JSON, \
 FILE_TYPE_PROTOBUF, \
 FILE_TYPE_BASH_SCRIPT, \
-FILE_TYPE_PYTHON_SCRIPT = range( 0, 9)
+FILE_TYPE_PYTHON_SCRIPT = range( 0, 10)
 
 ###############################
 # Constants: End
@@ -96,10 +97,13 @@ def createFile():
         elif file_extension == '.js':
             file_type = FILE_TYPE_JS
             comment_character = "//"
+        elif file_extension == '.go':
+            file_type = FILE_TYPE_GO
+            comment_character = "//"
     else:
         file_type = FILE_TYPE_PYTHON_UNKNOWN
         comment_character = "#"
-        
+
 
     #print "File: Extn: ", file_extension, " Cmnt: ", comment_character
 
