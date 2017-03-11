@@ -289,6 +289,14 @@ def addStandardHeader( fp, file_type, comment_character):
       fp.write( comment_character + "   - Object: \n")
     fp.write( comment_character * comment_character_length + "\n")
 
+def isFilePresent(fileName):
+    if not fileName:
+        return False
+    elif not isinstance(fileName, str):
+        return False
+    else:
+        return os.path.exists(fileName)
+
 ###############################
 # Function: touchf()
 ###############################
@@ -299,6 +307,10 @@ def touchf():
     status, file_to_create = processCommandLine()
     if not status:
         return printHelp()
+
+    if isFilePresent(file_to_create):
+        print "fatal: file already present: ", file_to_create
+        return FAILURE
 
     if not createFile():
         print "File: Creation: Failed: "
