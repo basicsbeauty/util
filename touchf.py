@@ -202,10 +202,10 @@ def process_body_python( fp):
     fp.write("###############################\n")
     fp.write("# Constants\n")
     fp.write("###############################\n")
-    fp.write("BASH_RCODE_FAILURE=1\n")
-    fp.write("BASH_RCODE_SUCCESS=0\n")
-    fp.write("FUNCTION_RCODE_FAILURE=0\n")
-    fp.write("FUNCTION_RCODE_SUCCESS=1\n\n")
+    fp.write("BASH_RCODE_FAILURE = 1\n")
+    fp.write("BASH_RCODE_SUCCESS = 0\n")
+    fp.write("FUNCTION_RCODE_FAILURE = 0\n")
+    fp.write("FUNCTION_RCODE_SUCCESS = 1\n\n")
 
     # Function
     function_name_signature = script_main_function_name+"()"
